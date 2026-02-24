@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('calcForm');
   const result = document.getElementById('result');
+  const themeToggle = document.getElementById('themeToggle');
 
   // Function to calculate and update result
   const updateResult = () => {
@@ -21,6 +22,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize and update live on input
   updateResult();
+
+  // Theme handling: persist in localStorage and toggle `body.dark`
+  function applyTheme(t) {
+    document.body.classList.toggle('dark', t === 'dark');
+    if (themeToggle) themeToggle.textContent = t === 'dark' ? '☀️' : '🌙';
+  }
+
+  const saved = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(saved);
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const next = document.body.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+  }
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
