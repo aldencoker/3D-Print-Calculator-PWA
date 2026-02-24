@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('calcForm');
   const result = document.getElementById('result');
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // Function to calculate and update result
+  const updateResult = () => {
     const design = parseFloat(form.design.value) || 0;
     const mass = parseFloat(form.mass.value) || 0;
     const printTime = parseFloat(form.printtime.value) || 0;
@@ -12,6 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let rounded = Math.round(cost / 5) * 5;
     if (rounded === 0) rounded = 5;
     result.textContent = `$${rounded}`;
+  };
+
+  // Update on input change (real-time)
+  form.design.addEventListener('input', updateResult);
+  form.mass.addEventListener('input', updateResult);
+  form.printtime.addEventListener('input', updateResult);
+
+  // Keep submit button functionality
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    updateResult();
   });
 
   if ('serviceWorker' in navigator) {
