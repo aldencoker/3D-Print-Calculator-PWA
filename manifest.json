@@ -1,0 +1,10 @@
+{
+  "name": "3D Print Calculator",
+  "short_name": "3D Calc",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f7f9ff",
+  "theme_color": "#0b5cff",
+  "description": "Simple 3D print cost calculator",
+  "icons": []
+}

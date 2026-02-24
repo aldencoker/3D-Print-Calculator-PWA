@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b5cff" />
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/style.css">
+  <title>3D Print Calculator</title>
+</head>
+<body>
+  <main>
+    <h1>3D Print Cost Calculator</h1>
+
+    <form id="calcForm">
+      <label for="design">Design Time (hours, optional)</label>
+      <input id="design" name="design" type="number" step="0.01" min="0" placeholder="e.g. 1.5">
+
+      <label for="mass">Mass (g)</label>
+      <input id="mass" name="mass" type="number" step="0.01" min="0" placeholder="e.g. 25">
+
+      <label for="printtime">Print Time (hours)</label>
+      <input id="printtime" name="printtime" type="number" step="0.01" min="0" placeholder="e.g. 3.25">
+
+      <button type="submit">Calculate</button>
+    </form>
+
+    <div id="result" aria-live="polite">$—</div>
+    <p class="note">Rounded to nearest $5 (minimum $5)</p>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
