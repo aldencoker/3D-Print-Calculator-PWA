@@ -19,13 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
   form.mass.addEventListener('input', updateResult);
   form.printtime.addEventListener('input', updateResult);
 
-  // Keep submit button functionality
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    updateResult();
-  });
+  // Initialize and update live on input
+  updateResult();
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    navigator.serviceWorker.register('sw.js').catch(() => {});
   }
 });

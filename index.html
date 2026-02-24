@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b5cff" />
-  <link rel="manifest" href="/manifest.json">
-  <link rel="stylesheet" href="/style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
   <title>3D Print Calculator</title>
 </head>
 <body>
@@ -22,13 +22,13 @@
       <label for="printtime">Print Time (hours)</label>
       <input id="printtime" name="printtime" type="number" step="0.01" min="0" placeholder="e.g. 3.25">
 
-      <button type="submit">Calculate</button>
+      <!-- button removed: calculation updates automatically on input -->
     </form>
 
     <div id="result" aria-live="polite">$—</div>
     <p class="note">Rounded to nearest $5 (minimum $5)</p>
   </main>
 
-  <script src="/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
