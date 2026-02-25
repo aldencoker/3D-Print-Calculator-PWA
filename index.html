@@ -26,8 +26,11 @@
       <label for="mass">Mass (g)</label>
       <input id="mass" name="mass" type="number" step="0.01" min="0" placeholder="e.g. 25">
 
-      <label for="printtime">Print Time (hrs)</label>
-      <input id="printtime" name="printtime" type="number" step="0.01" min="0" placeholder="e.g. 3.25">
+      <label for="printHours">Print Time — Hours</label>
+      <input id="printHours" name="printHours" type="number" step="0.01" min="0" placeholder="e.g. 3 or 3.5">
+
+      <label for="printMinutes">Print Time — Minutes (optional)</label>
+      <input id="printMinutes" name="printMinutes" type="number" step="1" min="0" max="59" placeholder="e.g. 15">
     </form>
 
     <button id="clear" class="clear-btn" type="button" aria-label="Clear inputs">Clear</button>

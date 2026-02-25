@@ -7,7 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateResult = () => {
     const design = parseFloat(form.design.value) || 0;
     const mass = parseFloat(form.mass.value) || 0;
-    const printTime = parseFloat(form.printtime.value) || 0;
+    // Support print hours (decimal) and optional minutes -> combined hours
+    const phRaw = form.printHours && form.printHours.value ? form.printHours.value : '';
+    const pmRaw = form.printMinutes && form.printMinutes.value ? form.printMinutes.value : '';
+
+    const ph = parseFloat(phRaw);
+    const pm = parseFloat(pmRaw);
+
+    const printTime = (Number.isFinite(ph) ? ph : 0) + (Number.isFinite(pm) ? (pm / 60) : 0);
 
     let cost = design * 30 + mass * 0.05 + printTime;
     let rounded = Math.round(cost / 5) * 5;
@@ -18,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Update on input change (real-time)
   form.design.addEventListener('input', updateResult);
   form.mass.addEventListener('input', updateResult);
-  form.printtime.addEventListener('input', updateResult);
+  if (form.printHours) form.printHours.addEventListener('input', updateResult);
+  if (form.printMinutes) form.printMinutes.addEventListener('input', updateResult);
 
   // Initialize and update live on input
   updateResult();
@@ -29,7 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     clearBtn.addEventListener('click', () => {
       form.design.value = '';
       form.mass.value = '';
-      form.printtime.value = '';
+      if (form.printHours) form.printHours.value = '';
+      if (form.printMinutes) form.printMinutes.value = '';
       updateResult();
       form.design.focus();
     });
