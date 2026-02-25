@@ -13,10 +13,13 @@
 </head>
 <body>
   <main>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    <div class="toggle-switch">
+      <input id="themeToggle" type="checkbox" role="switch" aria-checked="false">
+      <label for="themeToggle" aria-hidden="true"><span class="switch-knob"></span></label>
+    </div>
     <h1>3D Print Cost</h1>
 
-    <form id="calcForm" class="compact">
+    <form id="calcForm" class="stacked">
       <input id="design" name="design" type="number" step="0.01" min="0" placeholder="Design hrs">
       <input id="mass" name="mass" type="number" step="0.01" min="0" placeholder="Mass g">
       <input id="printtime" name="printtime" type="number" step="0.01" min="0" placeholder="Print hrs">

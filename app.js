@@ -38,22 +38,50 @@ document.addEventListener('DOMContentLoaded', () => {
   // Theme handling: persist in localStorage and toggle `body.dark`
   function applyTheme(t) {
     document.body.classList.toggle('dark', t === 'dark');
-    if (themeToggle) themeToggle.textContent = t === 'dark' ? '☀️' : '🌙';
-    if (themeToggle) themeToggle.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
+    if (themeToggle) {
+      // themeToggle is now a checkbox input acting as a switch
+      themeToggle.checked = t === 'dark';
+      themeToggle.setAttribute('aria-checked', t === 'dark' ? 'true' : 'false');
+    }
   }
 
   const saved = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   applyTheme(saved);
 
   if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const next = document.body.classList.contains('dark') ? 'light' : 'dark';
+    themeToggle.addEventListener('change', () => {
+      const next = themeToggle.checked ? 'dark' : 'light';
       localStorage.setItem('theme', next);
       applyTheme(next);
     });
   }
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(() => {});
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      // If there's an already-waiting SW, tell it to skipWaiting
+      if (reg.waiting) {
+        reg.waiting.postMessage('SKIP_WAITING');
+      }
+
+      // Listen for updates found (new SW installing)
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        if (!newWorker) return;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'installed' && reg.waiting) {
+            // Ask the new service worker to activate immediately
+            reg.waiting.postMessage('SKIP_WAITING');
+          }
+        });
+      });
+
+      // Reload page when the new service worker takes control
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (refreshing) return;
+        refreshing = true;
+        window.location.reload();
+      });
+    }).catch(() => {});
   }
 });
