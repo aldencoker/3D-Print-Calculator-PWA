@@ -23,10 +23,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize and update live on input
   updateResult();
 
+  // Clear button: reset fields and update
+  const clearBtn = document.getElementById('clear');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      form.design.value = '';
+      form.mass.value = '';
+      form.printtime.value = '';
+      updateResult();
+      form.design.focus();
+    });
+  }
+
   // Theme handling: persist in localStorage and toggle `body.dark`
   function applyTheme(t) {
     document.body.classList.toggle('dark', t === 'dark');
     if (themeToggle) themeToggle.textContent = t === 'dark' ? '☀️' : '🌙';
+    if (themeToggle) themeToggle.setAttribute('aria-pressed', t === 'dark' ? 'true' : 'false');
   }
 
   const saved = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
