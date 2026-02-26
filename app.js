@@ -44,6 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Individual clear buttons for each field
+  const clearDesign = document.getElementById('clear-design');
+  const clearMass = document.getElementById('clear-mass');
+  const clearPrintHours = document.getElementById('clear-printHours');
+  const clearPrintMinutes = document.getElementById('clear-printMinutes');
+
+  if (clearDesign) clearDesign.addEventListener('click', () => { form.design.value = ''; updateResult(); form.design.focus(); });
+  if (clearMass) clearMass.addEventListener('click', () => { form.mass.value = ''; updateResult(); form.mass.focus(); });
+  if (clearPrintHours) clearPrintHours.addEventListener('click', () => { if (form.printHours) form.printHours.value = ''; updateResult(); if (form.printHours) form.printHours.focus(); });
+  if (clearPrintMinutes) clearPrintMinutes.addEventListener('click', () => { if (form.printMinutes) form.printMinutes.value = ''; updateResult(); if (form.printMinutes) form.printMinutes.focus(); });
+
   // Theme handling: persist in localStorage and toggle `body.dark`
   function applyTheme(t) {
     document.body.classList.toggle('dark', t === 'dark');
@@ -67,6 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').then(reg => {
+      // ask SW to check for updates immediately
+      try { reg.update(); } catch (e) {}
       // If there's an already-waiting SW, tell it to skipWaiting
       if (reg.waiting) {
         reg.waiting.postMessage('SKIP_WAITING');
@@ -89,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (refreshing) return;
         refreshing = true;
+        console.log('Service worker controller changed — reloading to apply update');
         window.location.reload();
       });
     }).catch(() => {});

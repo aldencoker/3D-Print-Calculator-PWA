@@ -8,15 +8,23 @@
 }
 
 *{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-html,body{height:100%;margin:0;background:var(--bg);color:var(--text)}
-main{max-width:420px;margin:6vh auto;padding:18px;background:var(--card);border-radius:12px;box-shadow:0 6px 30px rgba(7,12,27,0.06);position:relative}
+hml,body{height:100%;margin:0;background:linear-gradient(180deg,#eef6ff 0%, #f7f9ff 40%, #eef6ff 100%);color:var(--text);background-attachment:fixed}
+main{max-width:420px;margin:6vh auto;padding:18px;background:rgba(255,255,255,0.6);backdrop-filter:blur(6px);border-radius:12px;position:relative}
 h1{font-size:18px;margin:0 0 12px}
 
 /* compact inline inputs */
 .stacked{display:flex;flex-direction:column;gap:10px}
-.stacked input{width:100%;padding:12px;border:1px solid #e6ebf5;border-radius:10px;font-size:15px}
+.stacked input{width:100%;padding:12px;border:0;border-radius:10px;font-size:15px;background:rgba(255,255,255,0.75)}
 
 .stacked label{font-size:13px;color:var(--muted);margin-bottom:6px}
+
+.field{position:relative}
+.field .clear-field{position:absolute;right:8px;top:34px;border:0;background:transparent;font-size:18px;line-height:1;color:var(--muted);cursor:pointer;width:28px;height:28px;border-radius:6px}
+.field .clear-field:hover{background:rgba(0,0,0,0.04)}
+.field input{padding-right:42px}
+
+.clear-btn{display:block;margin-top:12px;padding:8px 10px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent;color:var(--text);cursor:pointer;font-weight:600}
+.clear-btn:hover{opacity:.95}
 
 /* toggle switch */
 .toggle-switch{position:absolute;right:12px;top:12px;z-index:2}
@@ -31,12 +39,17 @@ h1{font-size:18px;margin:0 0 12px}
 
 /* Dark mode */
 body.dark{
-	--bg:#0b1220;
-	--card:#071025;
+	--bg:#061024;
+	--card:rgba(7,16,28,0.6);
 	--accent:#6ea8ff;
 	--muted:#9aa7bd;
 	--text:#f6fbff;
 }
+
+/* dark adjustments */
+body.dark .stacked input{background:rgba(255,255,255,0.04)}
+body.dark .field .clear-field{color:var(--muted)}
+body.dark .clear-btn{border-color:rgba(255,255,255,0.04)}
 
 body,button,input{transition:background-color .15s,color .15s;border-color .15s}
 

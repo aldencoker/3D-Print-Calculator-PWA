@@ -20,20 +20,32 @@
     <h1>3D Print Cost</h1>
 
     <form id="calcForm" class="stacked">
-      <label for="design">Design Time (hrs)</label>
-      <input id="design" name="design" type="number" step="0.01" min="0" placeholder="e.g. 1.5">
+      <div class="field">
+        <label for="design">Design Time (hrs)</label>
+        <input id="design" name="design" type="number" step="0.01" min="0" placeholder="e.g. 1.5">
+        <button id="clear-design" class="clear-field" type="button" aria-label="Clear design">×</button>
+      </div>
 
-      <label for="mass">Mass (g)</label>
-      <input id="mass" name="mass" type="number" step="0.01" min="0" placeholder="e.g. 25">
+      <div class="field">
+        <label for="mass">Mass (g)</label>
+        <input id="mass" name="mass" type="number" step="0.01" min="0" placeholder="e.g. 25">
+        <button id="clear-mass" class="clear-field" type="button" aria-label="Clear mass">×</button>
+      </div>
 
-      <label for="printHours">Print Time — Hours</label>
-      <input id="printHours" name="printHours" type="number" step="0.01" min="0" placeholder="e.g. 3 or 3.5">
+      <div class="field">
+        <label for="printHours">Print Time — Hours</label>
+        <input id="printHours" name="printHours" type="number" step="0.01" min="0" placeholder="e.g. 3 or 3.5">
+        <button id="clear-printHours" class="clear-field" type="button" aria-label="Clear print hours">×</button>
+      </div>
 
-      <label for="printMinutes">Print Time — Minutes (optional)</label>
-      <input id="printMinutes" name="printMinutes" type="number" step="1" min="0" max="59" placeholder="e.g. 15">
+      <div class="field">
+        <label for="printMinutes">Print Time — Minutes (optional)</label>
+        <input id="printMinutes" name="printMinutes" type="number" step="1" min="0" max="59" placeholder="e.g. 15">
+        <button id="clear-printMinutes" class="clear-field" type="button" aria-label="Clear print minutes">×</button>
+      </div>
     </form>
 
-    <button id="clear" class="clear-btn" type="button" aria-label="Clear inputs">Clear</button>
+    <button id="clear" class="clear-btn" type="button" aria-label="Clear all inputs">Clear All</button>
 
     <div id="result" aria-live="polite">$—</div>
   </main>
