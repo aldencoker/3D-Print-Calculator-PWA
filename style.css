@@ -8,7 +8,7 @@
 }
 
 *{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-hml,body{height:100%;margin:0;background:linear-gradient(180deg,#eef6ff 0%, #f7f9ff 40%, #eef6ff 100%);color:var(--text);background-attachment:fixed}
+hml,body{height:100%;margin:0;background:var(--bg);color:var(--text);background-attachment:fixed}
 main{max-width:420px;margin:6vh auto;padding:18px;background:rgba(255,255,255,0.6);backdrop-filter:blur(6px);border-radius:12px;position:relative}
 h1{font-size:18px;margin:0 0 12px}
 
